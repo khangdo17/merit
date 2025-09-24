@@ -7,7 +7,7 @@ export interface UserProfile {
 export const USER_PROFILE: UserProfile = {
   name: 'Khang Do',
   // Place an image at `public/profile.jpg` or use a full URL:
-  // avatarUrl: '/profile.jpg',
+  avatarUrl: '/profile.jpg',
 };
 
 
