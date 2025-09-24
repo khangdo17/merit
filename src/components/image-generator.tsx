@@ -106,6 +106,30 @@ export default function ImageGenerator() {
   const [imageHistory, setImageHistory] = useState<GeneratedImage[]>([]);
   const promptInputRef = useRef<HTMLFormElement>(null);
 
+  const DEMO_PROMPTS: { label: string; text: string }[] = [
+    {
+      label: 'Cyberpunk Gundam',
+      text:
+        'Neon-drenched cyberpunk city at night, two Gundam dueling on skyscraper rooftops, glowing holograms, rain-soaked streets reflecting neon lights, ultra-detailed futuristic vibe.',
+    },
+    {
+      label: 'Dark Fantasy Style',
+      text:
+        'Dark fantasy reimagining of Gundam mechas as armored knights battling in a ruined gothic castle floating in space, glowing runes, fire and smoke, epic otherworldly atmosphere.',
+    },
+  ];
+
+  const applyPromptAndSend = useCallback((text: string) => {
+    const form = promptInputRef.current;
+    if (!form) return;
+    const textarea = form.querySelector<HTMLTextAreaElement>('textarea[name="message"]');
+    if (!textarea) return;
+    textarea.value = text;
+    // Trigger native change event to keep React state in sync if needed
+    textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    form.requestSubmit();
+  }, []);
+
   // Handle adding files to the input from external triggers (like from image history)
   const handleAddToInput = useCallback((files: File[]) => {
     const actions = window.__promptInputActions;
@@ -317,6 +341,20 @@ export default function ImageGenerator() {
                 ))}
               </PromptInputModelSelectContent>
             </PromptInputModelSelect>
+
+            {/* Demo prompt buttons */}
+            {DEMO_PROMPTS.map(demo => (
+              <Button
+                key={demo.label}
+                type="button"
+                variant="secondary"
+                size="sm"
+                onClick={() => applyPromptAndSend(demo.text)}
+                className="whitespace-nowrap"
+              >
+                {demo.label}
+              </Button>
+            ))}
           </PromptInputTools>
           <div className="flex items-center gap-2">
             <Button

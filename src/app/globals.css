@@ -120,3 +120,22 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Subtle animated background gradient for header */
+.animated-header-bg {
+  background: linear-gradient(110deg, rgba(248,250,252,1) 0%, rgba(241,245,249,1) 50%, rgba(248,250,252,1) 100%);
+  background-size: 200% 200%;
+  animation: headerShimmer 6s ease-in-out infinite;
+}
+
+@keyframes headerShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
