@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "pnpm dedupe || node -e \"process.exit(0)\""
+    "lint": "next lint"
   },
   "dependencies": {
     "@ai-sdk/openai": "2.0.16",
